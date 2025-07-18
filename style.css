@@ -48,6 +48,18 @@ main {
   z-index: 2; /* Acima das bolhas */
 }
 
+.box .theme-title {
+  text-align: center;
+  font-size: 2.2rem;
+  color: var(--neon);
+  text-shadow: 0 0 10px var(--neon), 0 0 20px rgba(109, 117, 114, 0.7);
+  padding: 15px 0;
+  margin-top: 0;
+  margin-bottom: 25px;
+  border-bottom: 2px solid var(--green);
+  letter-spacing: 2px;
+}
+
 .box {
   background-color: #0f111a;
   border: 2px solid var(--green);
@@ -59,15 +71,14 @@ main {
   transition: all 0.3s ease;
 }
 
-/* Estilo para o título da caixa, para posicionar o ícone */
 .box h2 {
   margin: 0;
   color: var(--green);
   text-transform: uppercase;
-  display: flex; /* Permite alinhar o texto e o ícone */
-  justify-content: space-between; /* Empurra o ícone para a direita */
-  align-items: center; /* Alinha verticalmente */
-  font-size: 1.4rem; /* Garante que o tamanho da fonte não afete o ícone */
+  display: flex; 
+  justify-content: space-between; 
+  align-items: center; 
+  font-size: 1.5rem; 
 }
 
 /* Estilo para o ícone de toggle (o + ou -) */
@@ -111,7 +122,6 @@ main {
   opacity: 0; /* Faz a linha vertical sumir, deixando apenas a horizontal (efeito de "-") */
 }
 
-
 .box-content {
   max-height: 0;
   overflow: hidden;
@@ -121,7 +131,7 @@ main {
 }
 
 .box.open .box-content {
-  max-height: 1000px; /* Aumentado para garantir que todo o conteúdo apareça */
+  max-height: 4000px; /* Aumentado para acomodar todo o conteúdo longo */
   opacity: 1;
   padding-top: 15px;
 }
@@ -396,4 +406,53 @@ footer {
 .zap-link:hover {
   color: var(--purple);
   text-shadow: 0 0 5px var(--purple);
+}
+
+.intro-list,
+.theme-examples,
+.roles-list,
+.tips-list {
+    list-style-type: none; /* Remove marcadores padrão */
+    padding-left: 0; /* Remove o recuo padrão */
+    margin-bottom: 15px;
+}
+
+.intro-list li,
+.theme-examples li,
+.roles-list li,
+.tips-list li {
+    position: relative;
+    padding-left: 25px; /* Espaço para o marcador customizado */
+    margin-bottom: 8px;
+    line-height: 1.5;
+}
+
+/* Marcador customizado para essas listas */
+.intro-list li::before,
+.theme-examples li::before,
+.roles-list li::before,
+.tips-list li::before {
+    content: '▶'; /* Usando um triângulo para o marcador */
+    color: var(--purple); /* Cor do marcador */
+    position: absolute;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 0.9rem; /* Tamanho do marcador */
+    font-weight: bold;
+}
+
+/* Ajuste para o texto em negrito dentro dessas listas */
+.intro-list li strong,
+.theme-examples li strong,
+.roles-list li strong,
+.tips-list li strong {
+    color: var(--neon); /* Destaca o texto em negrito com a cor neon */
+}
+
+/* Se precisar de um estilo para o texto "Definição de Papéis:" que é um parágrafo,
+   mas funciona como um subtítulo, você pode adicionar uma classe a ele
+   ou estilizar p + ul (parágrafo seguido de ul) */
+.cronograma-item p + ul {
+    margin-top: -5px; /* Ajusta a margem para ficar mais próximo da definição */
 }
