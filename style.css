@@ -116,10 +116,9 @@ main {
   transition: transform 0.3s ease;
 }
 
-/* Quando a caixa está aberta, a linha vertical some ou gira para formar um X ou - */
 .box.open .toggle-icon::after {
-  transform: translateX(-50%) rotate(90deg); /* Faz a linha vertical girar, formando um "X" com a horizontal */
-  opacity: 0; /* Faz a linha vertical sumir, deixando apenas a horizontal (efeito de "-") */
+  transform: translateX(-50%) rotate(90deg); 
+  opacity: 0; 
 }
 
 .box-content {
@@ -131,7 +130,7 @@ main {
 }
 
 .box.open .box-content {
-  max-height: 4000px; /* Aumentado para acomodar todo o conteúdo longo */
+  max-height: 4000px; 
   opacity: 1;
   padding-top: 15px;
 }
@@ -178,23 +177,21 @@ footer {
   text-decoration: underline;
 }
 
-/* Bolhas como fundo animado */
 .bubble-background {
-  position: fixed; /* Fixado para cobrir todo o viewport independente do scroll */
+  position: fixed;
   top: 0;
   left: 0;
   width: 100%;
-  height: 100vh; /* Altura do viewport */
-  z-index: 0; /* Fica abaixo do conteúdo principal */
+  height: 100vh; 
+  z-index: 0;
   overflow: hidden;
-  pointer-events: none; /* Garante que as bolhas não interfiram com cliques */
+  pointer-events: none; 
 }
 
 .bubble-background span {
-    position: absolute; /* Posicionamento absoluto dentro do bubble-background */
+    position: absolute;
     border-radius: 50%;
-    /* As cores e sombras são controladas pelo JavaScript */
-    animation: animateBubbles linear infinite; /* Animação única para todas */
+    animation: animateBubbles linear infinite;
 }
 
 @keyframes animateBubbles {
@@ -209,52 +206,51 @@ footer {
         opacity: 1;
     }
     100% {
-        transform: translateY(-100vh) scale(1.2); /* Sobe 100% da altura do viewport e aumenta */
+        transform: translateY(-100vh) scale(1.2); 
         opacity: 0;
     }
 }
 
-/* --- Estilos para as Regras de Participação (Texto) --- */
 
 .box-content p {
-    line-height: 1.6; /* Espaçamento entre linhas para melhor leitura */
+    line-height: 1.6; 
     margin-bottom: 15px;
 }
 
 .box-content h3.subsection-title {
-    color: var(--neon); /* Cor vibrante para o título da subseção */
+    color: var(--neon); 
     font-size: 1.6rem;
     margin-top: 25px;
     margin-bottom: 15px;
-    text-shadow: 0 0 5px rgba(0, 255, 153, 0.5); /* Sombra para dar destaque */
-    border-bottom: 1px solid var(--green); /* Linha sutil abaixo do título */
+    text-shadow: 0 0 5px rgba(0, 255, 153, 0.5); 
+    border-bottom: 1px solid var(--green); 
     padding-bottom: 10px;
 }
 
 .box-content h4.rule-heading {
-    color: var(--green); /* Cor para os títulos das regras */
+    color: var(--green); 
     font-size: 1.2rem;
     margin-top: 20px;
     margin-bottom: 10px;
 }
 
 .box-content ul {
-    list-style-type: none; /* Remove marcadores padrão */
-    padding-left: 20px; /* Recuo para as listas */
+    list-style-type: none; 
+    padding-left: 20px;
     margin-bottom: 15px;
 }
 
 .box-content ul li {
     position: relative;
-    padding-left: 25px; /* Espaço para o marcador customizado */
+    padding-left: 25px; 
     margin-bottom: 8px;
     line-height: 1.5;
 }
 
-/* Marcador de lista customizado */
+
 .box-content ul li::before {
-    content: '>'; /* Usando um '>' como marcador */
-    color: var(--neon); /* Cor do marcador */
+    content: '>'; 
+    color: var(--neon); 
     position: absolute;
     left: 0;
     top: 50%;
@@ -263,31 +259,29 @@ footer {
 }
 
 .box-content .sub-rules {
-    list-style-type: disc; /* Marcadores de disco para sub-regras */
-    padding-left: 40px; /* Mais recuo */
+    list-style-type: disc; 
+    padding-left: 40px; 
 }
 
 .box-content .sub-rules li::before {
-    content: ''; /* Remove o '>' para essas sub-listas */
+    content: ''; 
 }
 
 .box-content strong {
-    color: var(--neon); /* Destaca texto em negrito com cor neon */
+    color: var(--neon); 
 }
 
 .attention-text {
-    color: var(--purple); /* Cor para texto de atenção */
+    color: var(--purple); 
     font-weight: bold;
     text-align: center;
     margin: 25px 0;
     padding: 15px;
-    border: 1px dashed var(--purple); /* Borda tracejada para destaque */
+    border: 1px dashed var(--purple); 
     border-radius: 8px;
-    background-color: rgba(200, 158, 255, 0.1); /* Fundo levemente colorido */
+    background-color: rgba(200, 158, 255, 0.1); 
 }
 
-
-/* --- Estilos para o Cronograma Oficial --- */
 
 .cronograma-divider {
     border: 0;
