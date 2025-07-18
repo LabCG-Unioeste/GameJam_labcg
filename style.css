@@ -1,0 +1,399 @@
+:root {
+  --green: #52d9a3;
+  --purple: #c89eff;
+  --blue-dark: #181a24;
+  --neon: #00ff99;
+  --text: #ffffff;
+}
+
+body {
+  margin: 0;
+  font-family: 'Courier New', monospace;
+  background-color: var(--blue-dark);
+  color: var(--text);
+  overflow-x: hidden; /* Evita scroll horizontal indesejado */
+}
+
+header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;     /* centraliza horizontalmente */
+  justify-content: center; /* centraliza verticalmente se necessário */
+  text-align: center;
+  padding: 40px 20px;
+  position: relative; /* Para garantir que o z-index funcione corretamente */
+  z-index: 2; /* Acima das bolhas */
+}
+
+.capa {
+  width: 100%;
+  max-width: 900px;
+  border-radius: 12px;
+  margin-bottom: 20px;
+}
+
+h1 {
+  color: var(--green);
+  font-size: 5rem;
+  text-shadow: 0 0 10px var(--green);
+  margin: 0 auto;           /* remove qualquer espaçamento lateral */
+  line-height: 1.2;
+}
+
+main {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 20px;
+  position: relative; /* Para garantir que o z-index funcione corretamente */
+  z-index: 2; /* Acima das bolhas */
+}
+
+.box {
+  background-color: #0f111a;
+  border: 2px solid var(--green);
+  padding: 20px;
+  margin: 30px 0;
+  border-radius: 12px;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.6);
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+/* Estilo para o título da caixa, para posicionar o ícone */
+.box h2 {
+  margin: 0;
+  color: var(--green);
+  text-transform: uppercase;
+  display: flex; /* Permite alinhar o texto e o ícone */
+  justify-content: space-between; /* Empurra o ícone para a direita */
+  align-items: center; /* Alinha verticalmente */
+  font-size: 1.4rem; /* Garante que o tamanho da fonte não afete o ícone */
+}
+
+/* Estilo para o ícone de toggle (o + ou -) */
+.toggle-icon {
+  position: relative; /* Para posicionar as linhas do + */
+  display: inline-block;
+  width: 20px; /* Largura do ícone */
+  height: 20px; /* Altura do ícone */
+  flex-shrink: 0; /* Impede que o ícone encolha se o texto for longo */
+}
+
+/* Linha horizontal para o + */
+.toggle-icon::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 0;
+  width: 100%;
+  height: 2px; /* Espessura da linha */
+  background-color: var(--neon); /* Cor do ícone */
+  transform: translateY(-50%);
+  transition: transform 0.3s ease;
+}
+
+/* Linha vertical para o + */
+.toggle-icon::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 50%;
+  width: 2px; /* Espessura da linha */
+  height: 100%;
+  background-color: var(--neon); /* Cor do ícone */
+  transform: translateX(-50%);
+  transition: transform 0.3s ease;
+}
+
+/* Quando a caixa está aberta, a linha vertical some ou gira para formar um X ou - */
+.box.open .toggle-icon::after {
+  transform: translateX(-50%) rotate(90deg); /* Faz a linha vertical girar, formando um "X" com a horizontal */
+  opacity: 0; /* Faz a linha vertical sumir, deixando apenas a horizontal (efeito de "-") */
+}
+
+
+.box-content {
+  max-height: 0;
+  overflow: hidden;
+  opacity: 0;
+  transition: all 0.4s ease;
+  padding-top: 0;
+}
+
+.box.open .box-content {
+  max-height: 1000px; /* Aumentado para garantir que todo o conteúdo apareça */
+  opacity: 1;
+  padding-top: 15px;
+}
+
+footer {
+  text-align: center;
+  padding: 30px 10px;
+  background-color: #10121a;
+  color: var(--purple);
+  position: relative;
+  z-index: 2;
+}
+
+.logos {
+  display: flex;
+  justify-content: center;
+  gap: 40px;
+  margin-top: 20px;
+}
+
+.logo-item {
+  text-align: center;
+}
+
+.logo-item img {
+  height: 60px;
+  margin-bottom: 8px;
+}
+
+.logo-item p {
+  color: var(--text);
+  font-size: 0.9rem;
+  margin: 0;
+}
+
+.logo-item a {
+  color: var(--text);
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.logo-item a:hover {
+  color: var(--purple);
+  text-decoration: underline;
+}
+
+/* Bolhas como fundo animado */
+.bubble-background {
+  position: fixed; /* Fixado para cobrir todo o viewport independente do scroll */
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh; /* Altura do viewport */
+  z-index: 0; /* Fica abaixo do conteúdo principal */
+  overflow: hidden;
+  pointer-events: none; /* Garante que as bolhas não interfiram com cliques */
+}
+
+.bubble-background span {
+    position: absolute; /* Posicionamento absoluto dentro do bubble-background */
+    border-radius: 50%;
+    /* As cores e sombras são controladas pelo JavaScript */
+    animation: animateBubbles linear infinite; /* Animação única para todas */
+}
+
+@keyframes animateBubbles {
+    0% {
+        transform: translateY(0) scale(0);
+        opacity: 0;
+    }
+    10% {
+        opacity: 1;
+    }
+    90% {
+        opacity: 1;
+    }
+    100% {
+        transform: translateY(-100vh) scale(1.2); /* Sobe 100% da altura do viewport e aumenta */
+        opacity: 0;
+    }
+}
+
+/* --- Estilos para as Regras de Participação (Texto) --- */
+
+.box-content p {
+    line-height: 1.6; /* Espaçamento entre linhas para melhor leitura */
+    margin-bottom: 15px;
+}
+
+.box-content h3.subsection-title {
+    color: var(--neon); /* Cor vibrante para o título da subseção */
+    font-size: 1.6rem;
+    margin-top: 25px;
+    margin-bottom: 15px;
+    text-shadow: 0 0 5px rgba(0, 255, 153, 0.5); /* Sombra para dar destaque */
+    border-bottom: 1px solid var(--green); /* Linha sutil abaixo do título */
+    padding-bottom: 10px;
+}
+
+.box-content h4.rule-heading {
+    color: var(--green); /* Cor para os títulos das regras */
+    font-size: 1.2rem;
+    margin-top: 20px;
+    margin-bottom: 10px;
+}
+
+.box-content ul {
+    list-style-type: none; /* Remove marcadores padrão */
+    padding-left: 20px; /* Recuo para as listas */
+    margin-bottom: 15px;
+}
+
+.box-content ul li {
+    position: relative;
+    padding-left: 25px; /* Espaço para o marcador customizado */
+    margin-bottom: 8px;
+    line-height: 1.5;
+}
+
+/* Marcador de lista customizado */
+.box-content ul li::before {
+    content: '>'; /* Usando um '>' como marcador */
+    color: var(--neon); /* Cor do marcador */
+    position: absolute;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    font-weight: bold;
+}
+
+.box-content .sub-rules {
+    list-style-type: disc; /* Marcadores de disco para sub-regras */
+    padding-left: 40px; /* Mais recuo */
+}
+
+.box-content .sub-rules li::before {
+    content: ''; /* Remove o '>' para essas sub-listas */
+}
+
+.box-content strong {
+    color: var(--neon); /* Destaca texto em negrito com cor neon */
+}
+
+.attention-text {
+    color: var(--purple); /* Cor para texto de atenção */
+    font-weight: bold;
+    text-align: center;
+    margin: 25px 0;
+    padding: 15px;
+    border: 1px dashed var(--purple); /* Borda tracejada para destaque */
+    border-radius: 8px;
+    background-color: rgba(200, 158, 255, 0.1); /* Fundo levemente colorido */
+}
+
+
+/* --- Estilos para o Cronograma Oficial --- */
+
+.cronograma-divider {
+    border: 0;
+    height: 1px;
+    background-image: linear-gradient(to right, rgba(0, 0, 0, 0), var(--green), rgba(0, 0, 0, 0));
+    margin: 30px 0;
+}
+
+.cronograma-item {
+    margin-bottom: 30px;
+    padding: 15px;
+    border: 1px solid rgba(82, 217, 163, 0.2); /* Borda sutil com transparência */
+    border-radius: 8px;
+    background-color: rgba(15, 17, 26, 0.8); /* Fundo levemente mais claro */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.4);
+}
+
+.cronograma-item .rule-heading {
+    color: var(--neon); /* Cor vibrante para o título do evento/período */
+    font-size: 1.3rem;
+    margin-top: 0;
+    margin-bottom: 10px;
+    text-shadow: 0 0 3px var(--neon);
+}
+
+.date-time {
+    color: var(--purple); /* Cor para as datas e horários */
+    font-weight: bold;
+    font-size: 1.1rem;
+    display: block; /* Garante que fique em sua própria linha */
+    margin-bottom: 10px;
+}
+
+.cronograma-item ul {
+    list-style-type: none; /* Remove marcadores padrão */
+    padding-left: 0; /* Remove recuo padrão */
+    margin-top: 10px;
+}
+
+.cronograma-item ul li {
+    position: relative;
+    padding-left: 20px; /* Espaço para o marcador customizado */
+    margin-bottom: 5px;
+    line-height: 1.4;
+}
+
+.cronograma-item ul li::before {
+    content: '▪'; /* Usando um quadrado preenchido como marcador */
+    color: var(--green); /* Cor do marcador */
+    position: absolute;
+    left: 0;
+    top: 0;
+    font-size: 1.2rem;
+}
+
+.note-text {
+    font-size: 0.95rem;
+    color: var(--text); /* Cor para notas e observações */
+    opacity: 0.8; /* Levemente mais transparente */
+    font-style: italic;
+    display: block; /* Garante que o span ocupe uma nova linha */
+    margin-top: 10px;
+}
+
+.cronograma-footer-note {
+    font-size: 0.9rem;
+    color: var(--purple);
+    text-align: center;
+    margin-top: 30px;
+}
+
+/* --- Estilos para a Seção de Descrição --- */
+
+.challenge-text {
+    color: var(--neon); /* Destaca o texto do desafio com a cor neon */
+    font-weight: bold;
+    font-size: 1.1rem;
+    padding: 10px;
+    border-left: 3px solid var(--green); /* Uma linha lateral para dar um toque especial */
+    margin-left: 10px;
+}
+
+.challenge-text strong {
+    color: var(--purple); /* A cor da palavra "colaboração" será roxa */
+}
+
+/* --- Estilos para as Sub-Caixas dentro de Regras de Participação --- */
+
+.sub-box {
+    background-color: #10121a; /* Fundo um pouco diferente para destacar a sub-seção */
+    border: 1px dashed var(--purple); /* Borda tracejada para diferenciar */
+    padding: 15px;
+    margin-top: 20px; /* Espaçamento entre as sub-caixas */
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.4);
+    cursor: pointer; /* Mantém o cursor de ponteiro */
+    transition: all 0.3s ease;
+}
+
+.sub-box h3 {
+    color: var(--neon); /* Cor do título da sub-seção */
+    font-size: 1.3rem;
+    margin-top: 0;
+    margin-bottom: 10px;
+    display: flex; /* Para alinhar o título e o ícone de toggle */
+    justify-content: space-between;
+    align-items: center;
+}
+
+.zap-link {
+  color: var(--green);
+  text-decoration: underline;
+  font-weight: bold;
+}
+
+.zap-link:hover {
+  color: var(--purple);
+  text-shadow: 0 0 5px var(--purple);
+}
