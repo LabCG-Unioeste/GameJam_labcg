@@ -130,7 +130,7 @@ main {
 }
 
 .box.open .box-content {
-  max-height: 4000px; 
+  max-height: 9999px; 
   opacity: 1;
   padding-top: 15px;
 }
@@ -421,7 +421,7 @@ footer {
     line-height: 1.5;
 }
 
-/* Marcador customizado para essas listas */
+
 .intro-list li::before,
 .theme-examples li::before,
 .roles-list li::before,
@@ -436,7 +436,7 @@ footer {
     font-weight: bold;
 }
 
-/* Ajuste para o texto em negrito dentro dessas listas */
+
 .intro-list li strong,
 .theme-examples li strong,
 .roles-list li strong,
@@ -444,9 +444,50 @@ footer {
     color: var(--neon); /* Destaca o texto em negrito com a cor neon */
 }
 
-/* Se precisar de um estilo para o texto "Definição de Papéis:" que é um parágrafo,
-   mas funciona como um subtítulo, você pode adicionar uma classe a ele
-   ou estilizar p + ul (parágrafo seguido de ul) */
+
 .cronograma-item p + ul {
     margin-top: -5px; /* Ajusta a margem para ficar mais próximo da definição */
+}
+
+
+p, span, li {
+    word-wrap: break-word; /* Quebra palavras longas se elas transbordarem */
+    overflow-wrap: break-word; /* Quebra palavras em qualquer ponto para caber na linha */
+    white-space: normal; /* Garante que o texto quebre normalmente */
+}
+
+
+.intro-list li .attention-text {
+    display: inline; /* ou inline-block, dependendo de como você quer o fluxo */
+    /* Remova qualquer padding ou margin excessivo aqui se houver */
+    padding: 0;
+    margin: 0;
+    border: none; /* Remova bordas que possam estar interferindo na quebra */
+    background-color: transparent; /* Remova fundo se estiver interferindo */
+    box-shadow: none; /* Remova sombra se estiver interferindo */
+}
+
+
+.box.open .box-content {
+  max-height: 9999px; /* Certifique-se que este valor está bem alto */
+  opacity: 1;
+  padding-top: 15px;
+}
+
+a.external-link {
+    color: var(--neon); /* Cor neon para o link */
+    text-decoration: underline; /* Sublinhado */
+    font-weight: bold;
+    transition: color 0.3s ease, transform 0.2s ease; /* Adiciona transição para transformação */
+    display: inline-block; /* Permite transformações como scale */
+    /* Para maior destaque, podemos aumentar um pouco o tamanho da fonte */
+    font-size: 1.1em; /* 10% maior que o texto circundante */
+    /* Adicionar um sutil brilho ao link */
+    text-shadow: 0 0 3px var(--neon), 0 0 8px rgba(0, 255, 153, 0.4);
+}
+
+a.external-link:hover {
+    color: var(--green); /* Muda de cor ao passar o mouse */
+    transform: scale(1.03); /* Leve zoom ao passar o mouse */
+    text-decoration: none; /* Remove sublinhado no hover para um efeito mais limpo */
 }
